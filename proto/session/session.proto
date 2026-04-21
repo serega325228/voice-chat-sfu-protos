@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package session;
+
+option go_package = "session.v1;sessionv1";
+
+service SessionService {
+  rpc RegisterPeer(RegisterPeerRequest) returns (RegisterPeerResponse);
+  rpc SignalPeer(stream SignalMessage) returns (stream SignalMessage);
+  rpc RemovePeer(RemovePeerRequest) returns (RemovePeerResponse);
+}
+
+
+//RegisterPeer
+message RegisterPeerRequest {
+    string session_id = 1;
+    string peer_id = 2;
+}
+
+message RegisterPeerResponse {}
+
+
+//SignalPeer
+message SignalMessage {
+  string session_id = 1;
+  string peer_id = 2;
+
+  oneof payload {
+    RemoteOffer remote_offer = 3;
+    RemoteIceCandidate remote_ice_candidate = 4;
+
+    LocalAnswer local_answer = 5;
+    LocalIceCandidate local_ice_candidate = 6;
+
+    PeerConnectionStateChanged connection_state_changed = 7;
+    PeerClosed peer_closed = 8;
+  }
+}
+message RemoteOffer {
+  SessionDescription offer = 1;
+}
+
+message RemoteIceCandidate {
+  IceCandidate candidate = 1;
+}
+
+message LocalAnswer {
+  SessionDescription answer = 1;
+}
+
+message LocalIceCandidate {
+  IceCandidate candidate = 1;
+}
+
+message SessionDescription {
+  SdpType type = 1;
+  string sdp = 2;
+}
+
+enum SdpType {
+  SDP_TYPE_UNSPECIFIED = 0;
+  SDP_TYPE_OFFER = 1;
+  SDP_TYPE_ANSWER = 2;
+}
+
+message IceCandidate {
+  string candidate = 1;
+  string sdp_mid = 2;
+  int32 sdp_mline_index = 3;
+  string username_fragment = 4;
+}
+
+message PeerConnectionStateChanged {
+  string state = 1;
+}
+
+message PeerClosed {
+  string reason = 1;
+}
+
+
+//RemovePeer
+message RemovePeerRequest {
+    string session_id = 1;
+    string peer_id = 2;
+}
+
+message RemovePeerResponse {}
