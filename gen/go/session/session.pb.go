@@ -846,8 +846,8 @@ const file_session_session_proto_rawDesc = "" +
 	"\aSdpType\x12\x18\n" +
 	"\x14SDP_TYPE_UNSPECIFIED\x10\x00\x12\x12\n" +
 	"\x0eSDP_TYPE_OFFER\x10\x01\x12\x13\n" +
-	"\x0fSDP_TYPE_ANSWER\x10\x022\xe6\x01\n" +
-	"\x0eSessionService\x12K\n" +
+	"\x0fSDP_TYPE_ANSWER\x10\x022\xdf\x01\n" +
+	"\aSession\x12K\n" +
 	"\fRegisterPeer\x12\x1c.session.RegisterPeerRequest\x1a\x1d.session.RegisterPeerResponse\x12@\n" +
 	"\n" +
 	"SignalPeer\x12\x16.session.SignalMessage\x1a\x16.session.SignalMessage(\x010\x01\x12E\n" +
@@ -896,12 +896,12 @@ var file_session_session_proto_depIdxs = []int32{
 	8,  // 8: session.LocalAnswer.answer:type_name -> session.SessionDescription
 	9,  // 9: session.LocalIceCandidate.candidate:type_name -> session.IceCandidate
 	0,  // 10: session.SessionDescription.type:type_name -> session.SdpType
-	1,  // 11: session.SessionService.RegisterPeer:input_type -> session.RegisterPeerRequest
-	3,  // 12: session.SessionService.SignalPeer:input_type -> session.SignalMessage
-	12, // 13: session.SessionService.RemovePeer:input_type -> session.RemovePeerRequest
-	2,  // 14: session.SessionService.RegisterPeer:output_type -> session.RegisterPeerResponse
-	3,  // 15: session.SessionService.SignalPeer:output_type -> session.SignalMessage
-	13, // 16: session.SessionService.RemovePeer:output_type -> session.RemovePeerResponse
+	1,  // 11: session.Session.RegisterPeer:input_type -> session.RegisterPeerRequest
+	3,  // 12: session.Session.SignalPeer:input_type -> session.SignalMessage
+	12, // 13: session.Session.RemovePeer:input_type -> session.RemovePeerRequest
+	2,  // 14: session.Session.RegisterPeer:output_type -> session.RegisterPeerResponse
+	3,  // 15: session.Session.SignalPeer:output_type -> session.SignalMessage
+	13, // 16: session.Session.RemovePeer:output_type -> session.RemovePeerResponse
 	14, // [14:17] is the sub-list for method output_type
 	11, // [11:14] is the sub-list for method input_type
 	11, // [11:11] is the sub-list for extension type_name

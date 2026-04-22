@@ -4,7 +4,7 @@ package session;
 
 option go_package = "session.v1;sessionv1";
 
-service SessionService {
+service Session {
   rpc RegisterPeer(RegisterPeerRequest) returns (RegisterPeerResponse);
   rpc SignalPeer(stream SignalMessage) returns (stream SignalMessage);
   rpc RemovePeer(RemovePeerRequest) returns (RemovePeerResponse);

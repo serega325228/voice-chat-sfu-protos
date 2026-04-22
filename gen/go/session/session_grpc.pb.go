@@ -19,41 +19,41 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	SessionService_RegisterPeer_FullMethodName = "/session.SessionService/RegisterPeer"
-	SessionService_SignalPeer_FullMethodName   = "/session.SessionService/SignalPeer"
-	SessionService_RemovePeer_FullMethodName   = "/session.SessionService/RemovePeer"
+	Session_RegisterPeer_FullMethodName = "/session.Session/RegisterPeer"
+	Session_SignalPeer_FullMethodName   = "/session.Session/SignalPeer"
+	Session_RemovePeer_FullMethodName   = "/session.Session/RemovePeer"
 )
 
-// SessionServiceClient is the client API for SessionService service.
+// SessionClient is the client API for Session service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type SessionServiceClient interface {
+type SessionClient interface {
 	RegisterPeer(ctx context.Context, in *RegisterPeerRequest, opts ...grpc.CallOption) (*RegisterPeerResponse, error)
 	SignalPeer(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[SignalMessage, SignalMessage], error)
 	RemovePeer(ctx context.Context, in *RemovePeerRequest, opts ...grpc.CallOption) (*RemovePeerResponse, error)
 }
 
-type sessionServiceClient struct {
+type sessionClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewSessionServiceClient(cc grpc.ClientConnInterface) SessionServiceClient {
-	return &sessionServiceClient{cc}
+func NewSessionClient(cc grpc.ClientConnInterface) SessionClient {
+	return &sessionClient{cc}
 }
 
-func (c *sessionServiceClient) RegisterPeer(ctx context.Context, in *RegisterPeerRequest, opts ...grpc.CallOption) (*RegisterPeerResponse, error) {
+func (c *sessionClient) RegisterPeer(ctx context.Context, in *RegisterPeerRequest, opts ...grpc.CallOption) (*RegisterPeerResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(RegisterPeerResponse)
-	err := c.cc.Invoke(ctx, SessionService_RegisterPeer_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Session_RegisterPeer_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *sessionServiceClient) SignalPeer(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[SignalMessage, SignalMessage], error) {
+func (c *sessionClient) SignalPeer(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[SignalMessage, SignalMessage], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &SessionService_ServiceDesc.Streams[0], SessionService_SignalPeer_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Session_ServiceDesc.Streams[0], Session_SignalPeer_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -62,128 +62,128 @@ func (c *sessionServiceClient) SignalPeer(ctx context.Context, opts ...grpc.Call
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type SessionService_SignalPeerClient = grpc.BidiStreamingClient[SignalMessage, SignalMessage]
+type Session_SignalPeerClient = grpc.BidiStreamingClient[SignalMessage, SignalMessage]
 
-func (c *sessionServiceClient) RemovePeer(ctx context.Context, in *RemovePeerRequest, opts ...grpc.CallOption) (*RemovePeerResponse, error) {
+func (c *sessionClient) RemovePeer(ctx context.Context, in *RemovePeerRequest, opts ...grpc.CallOption) (*RemovePeerResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(RemovePeerResponse)
-	err := c.cc.Invoke(ctx, SessionService_RemovePeer_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Session_RemovePeer_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// SessionServiceServer is the server API for SessionService service.
-// All implementations must embed UnimplementedSessionServiceServer
+// SessionServer is the server API for Session service.
+// All implementations must embed UnimplementedSessionServer
 // for forward compatibility.
-type SessionServiceServer interface {
+type SessionServer interface {
 	RegisterPeer(context.Context, *RegisterPeerRequest) (*RegisterPeerResponse, error)
 	SignalPeer(grpc.BidiStreamingServer[SignalMessage, SignalMessage]) error
 	RemovePeer(context.Context, *RemovePeerRequest) (*RemovePeerResponse, error)
-	mustEmbedUnimplementedSessionServiceServer()
+	mustEmbedUnimplementedSessionServer()
 }
 
-// UnimplementedSessionServiceServer must be embedded to have
+// UnimplementedSessionServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedSessionServiceServer struct{}
+type UnimplementedSessionServer struct{}
 
-func (UnimplementedSessionServiceServer) RegisterPeer(context.Context, *RegisterPeerRequest) (*RegisterPeerResponse, error) {
+func (UnimplementedSessionServer) RegisterPeer(context.Context, *RegisterPeerRequest) (*RegisterPeerResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method RegisterPeer not implemented")
 }
-func (UnimplementedSessionServiceServer) SignalPeer(grpc.BidiStreamingServer[SignalMessage, SignalMessage]) error {
+func (UnimplementedSessionServer) SignalPeer(grpc.BidiStreamingServer[SignalMessage, SignalMessage]) error {
 	return status.Error(codes.Unimplemented, "method SignalPeer not implemented")
 }
-func (UnimplementedSessionServiceServer) RemovePeer(context.Context, *RemovePeerRequest) (*RemovePeerResponse, error) {
+func (UnimplementedSessionServer) RemovePeer(context.Context, *RemovePeerRequest) (*RemovePeerResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method RemovePeer not implemented")
 }
-func (UnimplementedSessionServiceServer) mustEmbedUnimplementedSessionServiceServer() {}
-func (UnimplementedSessionServiceServer) testEmbeddedByValue()                        {}
+func (UnimplementedSessionServer) mustEmbedUnimplementedSessionServer() {}
+func (UnimplementedSessionServer) testEmbeddedByValue()                 {}
 
-// UnsafeSessionServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to SessionServiceServer will
+// UnsafeSessionServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to SessionServer will
 // result in compilation errors.
-type UnsafeSessionServiceServer interface {
-	mustEmbedUnimplementedSessionServiceServer()
+type UnsafeSessionServer interface {
+	mustEmbedUnimplementedSessionServer()
 }
 
-func RegisterSessionServiceServer(s grpc.ServiceRegistrar, srv SessionServiceServer) {
-	// If the following call panics, it indicates UnimplementedSessionServiceServer was
+func RegisterSessionServer(s grpc.ServiceRegistrar, srv SessionServer) {
+	// If the following call panics, it indicates UnimplementedSessionServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&SessionService_ServiceDesc, srv)
+	s.RegisterService(&Session_ServiceDesc, srv)
 }
 
-func _SessionService_RegisterPeer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Session_RegisterPeer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RegisterPeerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SessionServiceServer).RegisterPeer(ctx, in)
+		return srv.(SessionServer).RegisterPeer(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: SessionService_RegisterPeer_FullMethodName,
+		FullMethod: Session_RegisterPeer_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SessionServiceServer).RegisterPeer(ctx, req.(*RegisterPeerRequest))
+		return srv.(SessionServer).RegisterPeer(ctx, req.(*RegisterPeerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SessionService_SignalPeer_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(SessionServiceServer).SignalPeer(&grpc.GenericServerStream[SignalMessage, SignalMessage]{ServerStream: stream})
+func _Session_SignalPeer_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(SessionServer).SignalPeer(&grpc.GenericServerStream[SignalMessage, SignalMessage]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type SessionService_SignalPeerServer = grpc.BidiStreamingServer[SignalMessage, SignalMessage]
+type Session_SignalPeerServer = grpc.BidiStreamingServer[SignalMessage, SignalMessage]
 
-func _SessionService_RemovePeer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Session_RemovePeer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RemovePeerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SessionServiceServer).RemovePeer(ctx, in)
+		return srv.(SessionServer).RemovePeer(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: SessionService_RemovePeer_FullMethodName,
+		FullMethod: Session_RemovePeer_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SessionServiceServer).RemovePeer(ctx, req.(*RemovePeerRequest))
+		return srv.(SessionServer).RemovePeer(ctx, req.(*RemovePeerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// SessionService_ServiceDesc is the grpc.ServiceDesc for SessionService service.
+// Session_ServiceDesc is the grpc.ServiceDesc for Session service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var SessionService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "session.SessionService",
-	HandlerType: (*SessionServiceServer)(nil),
+var Session_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "session.Session",
+	HandlerType: (*SessionServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "RegisterPeer",
-			Handler:    _SessionService_RegisterPeer_Handler,
+			Handler:    _Session_RegisterPeer_Handler,
 		},
 		{
 			MethodName: "RemovePeer",
-			Handler:    _SessionService_RemovePeer_Handler,
+			Handler:    _Session_RemovePeer_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "SignalPeer",
-			Handler:       _SessionService_SignalPeer_Handler,
+			Handler:       _Session_SignalPeer_Handler,
 			ServerStreams: true,
 			ClientStreams: true,
 		},
