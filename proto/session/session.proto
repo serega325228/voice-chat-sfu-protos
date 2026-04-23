@@ -5,19 +5,27 @@ package session;
 option go_package = "session.v1;sessionv1";
 
 service Session {
-  rpc RegisterPeer(RegisterPeerRequest) returns (RegisterPeerResponse);
+  rpc CreateSession(CreateSessionRequest) returns (CreateSessionResponse);
+  rpc JoinSession(JoinSessionRequest) returns (JoinSessionResponse);
   rpc SignalPeer(stream SignalMessage) returns (stream SignalMessage);
-  rpc RemovePeer(RemovePeerRequest) returns (RemovePeerResponse);
+  rpc LeaveSession(LeaveSessionRequest) returns (LeaveSessionResponse);
 }
 
 
 //RegisterPeer
-message RegisterPeerRequest {
+message CreateSessionRequest {
     string session_id = 1;
     string peer_id = 2;
 }
 
-message RegisterPeerResponse {}
+message CreateSessionResponse {}
+
+message JoinSessionRequest {
+    string session_id = 1;
+    string peer_id = 2;
+}
+
+message JoinSessionResponse {}
 
 
 //SignalPeer
@@ -80,9 +88,9 @@ message PeerClosed {
 
 
 //RemovePeer
-message RemovePeerRequest {
+message LeaveSessionRequest {
     string session_id = 1;
     string peer_id = 2;
 }
 
-message RemovePeerResponse {}
+message LeaveSessionResponse {}
