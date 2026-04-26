@@ -1,4 +1,4 @@
-module voice-chat-sfu-protos
+module github.com/serega325228/voice-chat-sfu-protos
 
 go 1.26.2
 

@@ -40,8 +40,7 @@ message SignalMessage {
     LocalAnswer local_answer = 5;
     LocalIceCandidate local_ice_candidate = 6;
 
-    PeerConnectionStateChanged connection_state_changed = 7;
-    PeerClosed peer_closed = 8;
+    RenegotiationNeeded renegotiation_needed = 7;
   }
 }
 message RemoteOffer {
@@ -78,13 +77,7 @@ message IceCandidate {
   string username_fragment = 4;
 }
 
-message PeerConnectionStateChanged {
-  string state = 1;
-}
-
-message PeerClosed {
-  string reason = 1;
-}
+message RenegotiationNeeded {}
 
 
 //RemovePeer
