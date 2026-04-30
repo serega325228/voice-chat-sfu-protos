@@ -692,6 +692,7 @@ func (x *IceCandidate) GetUsernameFragment() string {
 
 type RenegotiationNeeded struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Offer         *SessionDescription    `protobuf:"bytes,1,opt,name=offer,proto3" json:"offer,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -724,6 +725,13 @@ func (x *RenegotiationNeeded) ProtoReflect() protoreflect.Message {
 // Deprecated: Use RenegotiationNeeded.ProtoReflect.Descriptor instead.
 func (*RenegotiationNeeded) Descriptor() ([]byte, []int) {
 	return file_session_session_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *RenegotiationNeeded) GetOffer() *SessionDescription {
+	if x != nil {
+		return x.Offer
+	}
+	return nil
 }
 
 // RemovePeer
@@ -855,8 +863,9 @@ const file_session_session_proto_rawDesc = "" +
 	"\tcandidate\x18\x01 \x01(\tR\tcandidate\x12\x17\n" +
 	"\asdp_mid\x18\x02 \x01(\tR\x06sdpMid\x12&\n" +
 	"\x0fsdp_mline_index\x18\x03 \x01(\x05R\rsdpMlineIndex\x12+\n" +
-	"\x11username_fragment\x18\x04 \x01(\tR\x10usernameFragment\"\x15\n" +
-	"\x13RenegotiationNeeded\"M\n" +
+	"\x11username_fragment\x18\x04 \x01(\tR\x10usernameFragment\"H\n" +
+	"\x13RenegotiationNeeded\x121\n" +
+	"\x05offer\x18\x01 \x01(\v2\x1b.session.SessionDescriptionR\x05offer\"M\n" +
 	"\x13LeaveSessionRequest\x12\x1d\n" +
 	"\n" +
 	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x17\n" +
@@ -915,19 +924,20 @@ var file_session_session_proto_depIdxs = []int32{
 	10, // 7: session.LocalAnswer.answer:type_name -> session.SessionDescription
 	11, // 8: session.LocalIceCandidate.candidate:type_name -> session.IceCandidate
 	0,  // 9: session.SessionDescription.type:type_name -> session.SdpType
-	1,  // 10: session.Session.CreateSession:input_type -> session.CreateSessionRequest
-	3,  // 11: session.Session.JoinSession:input_type -> session.JoinSessionRequest
-	5,  // 12: session.Session.SignalPeer:input_type -> session.SignalMessage
-	13, // 13: session.Session.LeaveSession:input_type -> session.LeaveSessionRequest
-	2,  // 14: session.Session.CreateSession:output_type -> session.CreateSessionResponse
-	4,  // 15: session.Session.JoinSession:output_type -> session.JoinSessionResponse
-	5,  // 16: session.Session.SignalPeer:output_type -> session.SignalMessage
-	14, // 17: session.Session.LeaveSession:output_type -> session.LeaveSessionResponse
-	14, // [14:18] is the sub-list for method output_type
-	10, // [10:14] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	10, // 10: session.RenegotiationNeeded.offer:type_name -> session.SessionDescription
+	1,  // 11: session.Session.CreateSession:input_type -> session.CreateSessionRequest
+	3,  // 12: session.Session.JoinSession:input_type -> session.JoinSessionRequest
+	5,  // 13: session.Session.SignalPeer:input_type -> session.SignalMessage
+	13, // 14: session.Session.LeaveSession:input_type -> session.LeaveSessionRequest
+	2,  // 15: session.Session.CreateSession:output_type -> session.CreateSessionResponse
+	4,  // 16: session.Session.JoinSession:output_type -> session.JoinSessionResponse
+	5,  // 17: session.Session.SignalPeer:output_type -> session.SignalMessage
+	14, // 18: session.Session.LeaveSession:output_type -> session.LeaveSessionResponse
+	15, // [15:19] is the sub-list for method output_type
+	11, // [11:15] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_session_session_proto_init() }

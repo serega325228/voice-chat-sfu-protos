@@ -77,7 +77,9 @@ message IceCandidate {
   string username_fragment = 4;
 }
 
-message RenegotiationNeeded {}
+message RenegotiationNeeded {
+  SessionDescription offer = 1;
+}
 
 
 //RemovePeer
