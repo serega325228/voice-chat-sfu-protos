@@ -11,22 +11,20 @@ service Session {
   rpc LeaveSession(LeaveSessionRequest) returns (LeaveSessionResponse);
 }
 
-
 //RegisterPeer
 message CreateSessionRequest {
-    string session_id = 1;
-    string peer_id = 2;
+  string session_id = 1;
+  string peer_id = 2;
 }
 
 message CreateSessionResponse {}
 
 message JoinSessionRequest {
-    string session_id = 1;
-    string peer_id = 2;
+  string session_id = 1;
+  string peer_id = 2;
 }
 
 message JoinSessionResponse {}
-
 
 //SignalPeer
 message SignalMessage {
@@ -81,11 +79,10 @@ message RenegotiationNeeded {
   SessionDescription offer = 1;
 }
 
-
 //RemovePeer
 message LeaveSessionRequest {
-    string session_id = 1;
-    string peer_id = 2;
+  string session_id = 1;
+  string peer_id = 2;
 }
 
 message LeaveSessionResponse {}
