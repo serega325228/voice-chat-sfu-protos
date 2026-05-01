@@ -19,11 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Session_CreateSession_FullMethodName    = "/session.Session/CreateSession"
-	Session_JoinSession_FullMethodName      = "/session.Session/JoinSession"
-	Session_OpenSignalStream_FullMethodName = "/session.Session/OpenSignalStream"
-	Session_SendSignal_FullMethodName       = "/session.Session/SendSignal"
-	Session_LeaveSession_FullMethodName     = "/session.Session/LeaveSession"
+	Session_CreateSession_FullMethodName = "/session.Session/CreateSession"
+	Session_JoinSession_FullMethodName   = "/session.Session/JoinSession"
+	Session_SignalPeer_FullMethodName    = "/session.Session/SignalPeer"
+	Session_LeaveSession_FullMethodName  = "/session.Session/LeaveSession"
 )
 
 // SessionClient is the client API for Session service.
@@ -32,8 +31,7 @@ const (
 type SessionClient interface {
 	CreateSession(ctx context.Context, in *CreateSessionRequest, opts ...grpc.CallOption) (*CreateSessionResponse, error)
 	JoinSession(ctx context.Context, in *JoinSessionRequest, opts ...grpc.CallOption) (*JoinSessionResponse, error)
-	OpenSignalStream(ctx context.Context, in *OpenSignalStreamRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SignalMessage], error)
-	SendSignal(ctx context.Context, in *SendSignalRequest, opts ...grpc.CallOption) (*SendSignalResponse, error)
+	SignalPeer(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[SignalMessage, SignalMessage], error)
 	LeaveSession(ctx context.Context, in *LeaveSessionRequest, opts ...grpc.CallOption) (*LeaveSessionResponse, error)
 }
 
@@ -65,34 +63,18 @@ func (c *sessionClient) JoinSession(ctx context.Context, in *JoinSessionRequest,
 	return out, nil
 }
 
-func (c *sessionClient) OpenSignalStream(ctx context.Context, in *OpenSignalStreamRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[SignalMessage], error) {
+func (c *sessionClient) SignalPeer(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[SignalMessage, SignalMessage], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Session_ServiceDesc.Streams[0], Session_OpenSignalStream_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Session_ServiceDesc.Streams[0], Session_SignalPeer_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &grpc.GenericClientStream[OpenSignalStreamRequest, SignalMessage]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
+	x := &grpc.GenericClientStream[SignalMessage, SignalMessage]{ClientStream: stream}
 	return x, nil
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type Session_OpenSignalStreamClient = grpc.ServerStreamingClient[SignalMessage]
-
-func (c *sessionClient) SendSignal(ctx context.Context, in *SendSignalRequest, opts ...grpc.CallOption) (*SendSignalResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SendSignalResponse)
-	err := c.cc.Invoke(ctx, Session_SendSignal_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
+type Session_SignalPeerClient = grpc.BidiStreamingClient[SignalMessage, SignalMessage]
 
 func (c *sessionClient) LeaveSession(ctx context.Context, in *LeaveSessionRequest, opts ...grpc.CallOption) (*LeaveSessionResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
@@ -110,8 +92,7 @@ func (c *sessionClient) LeaveSession(ctx context.Context, in *LeaveSessionReques
 type SessionServer interface {
 	CreateSession(context.Context, *CreateSessionRequest) (*CreateSessionResponse, error)
 	JoinSession(context.Context, *JoinSessionRequest) (*JoinSessionResponse, error)
-	OpenSignalStream(*OpenSignalStreamRequest, grpc.ServerStreamingServer[SignalMessage]) error
-	SendSignal(context.Context, *SendSignalRequest) (*SendSignalResponse, error)
+	SignalPeer(grpc.BidiStreamingServer[SignalMessage, SignalMessage]) error
 	LeaveSession(context.Context, *LeaveSessionRequest) (*LeaveSessionResponse, error)
 	mustEmbedUnimplementedSessionServer()
 }
@@ -129,11 +110,8 @@ func (UnimplementedSessionServer) CreateSession(context.Context, *CreateSessionR
 func (UnimplementedSessionServer) JoinSession(context.Context, *JoinSessionRequest) (*JoinSessionResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method JoinSession not implemented")
 }
-func (UnimplementedSessionServer) OpenSignalStream(*OpenSignalStreamRequest, grpc.ServerStreamingServer[SignalMessage]) error {
-	return status.Error(codes.Unimplemented, "method OpenSignalStream not implemented")
-}
-func (UnimplementedSessionServer) SendSignal(context.Context, *SendSignalRequest) (*SendSignalResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method SendSignal not implemented")
+func (UnimplementedSessionServer) SignalPeer(grpc.BidiStreamingServer[SignalMessage, SignalMessage]) error {
+	return status.Error(codes.Unimplemented, "method SignalPeer not implemented")
 }
 func (UnimplementedSessionServer) LeaveSession(context.Context, *LeaveSessionRequest) (*LeaveSessionResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method LeaveSession not implemented")
@@ -195,34 +173,12 @@ func _Session_JoinSession_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Session_OpenSignalStream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(OpenSignalStreamRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(SessionServer).OpenSignalStream(m, &grpc.GenericServerStream[OpenSignalStreamRequest, SignalMessage]{ServerStream: stream})
+func _Session_SignalPeer_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(SessionServer).SignalPeer(&grpc.GenericServerStream[SignalMessage, SignalMessage]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type Session_OpenSignalStreamServer = grpc.ServerStreamingServer[SignalMessage]
-
-func _Session_SendSignal_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SendSignalRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SessionServer).SendSignal(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Session_SendSignal_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SessionServer).SendSignal(ctx, req.(*SendSignalRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
+type Session_SignalPeerServer = grpc.BidiStreamingServer[SignalMessage, SignalMessage]
 
 func _Session_LeaveSession_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(LeaveSessionRequest)
@@ -258,19 +214,16 @@ var Session_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Session_JoinSession_Handler,
 		},
 		{
-			MethodName: "SendSignal",
-			Handler:    _Session_SendSignal_Handler,
-		},
-		{
 			MethodName: "LeaveSession",
 			Handler:    _Session_LeaveSession_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "OpenSignalStream",
-			Handler:       _Session_OpenSignalStream_Handler,
+			StreamName:    "SignalPeer",
+			Handler:       _Session_SignalPeer_Handler,
 			ServerStreams: true,
+			ClientStreams: true,
 		},
 	},
 	Metadata: "session/session.proto",

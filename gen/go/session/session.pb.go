@@ -247,150 +247,16 @@ func (*JoinSessionResponse) Descriptor() ([]byte, []int) {
 	return file_session_session_proto_rawDescGZIP(), []int{3}
 }
 
-// OpenSignalStream
-type OpenSignalStreamRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	SessionId     string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	PeerId        string                 `protobuf:"bytes,2,opt,name=peer_id,json=peerId,proto3" json:"peer_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *OpenSignalStreamRequest) Reset() {
-	*x = OpenSignalStreamRequest{}
-	mi := &file_session_session_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *OpenSignalStreamRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*OpenSignalStreamRequest) ProtoMessage() {}
-
-func (x *OpenSignalStreamRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_session_session_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use OpenSignalStreamRequest.ProtoReflect.Descriptor instead.
-func (*OpenSignalStreamRequest) Descriptor() ([]byte, []int) {
-	return file_session_session_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *OpenSignalStreamRequest) GetSessionId() string {
-	if x != nil {
-		return x.SessionId
-	}
-	return ""
-}
-
-func (x *OpenSignalStreamRequest) GetPeerId() string {
-	if x != nil {
-		return x.PeerId
-	}
-	return ""
-}
-
-// SendSignal
-type SendSignalRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Message       *SignalMessage         `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SendSignalRequest) Reset() {
-	*x = SendSignalRequest{}
-	mi := &file_session_session_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SendSignalRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SendSignalRequest) ProtoMessage() {}
-
-func (x *SendSignalRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_session_session_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SendSignalRequest.ProtoReflect.Descriptor instead.
-func (*SendSignalRequest) Descriptor() ([]byte, []int) {
-	return file_session_session_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *SendSignalRequest) GetMessage() *SignalMessage {
-	if x != nil {
-		return x.Message
-	}
-	return nil
-}
-
-type SendSignalResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SendSignalResponse) Reset() {
-	*x = SendSignalResponse{}
-	mi := &file_session_session_proto_msgTypes[6]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SendSignalResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SendSignalResponse) ProtoMessage() {}
-
-func (x *SendSignalResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_session_session_proto_msgTypes[6]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SendSignalResponse.ProtoReflect.Descriptor instead.
-func (*SendSignalResponse) Descriptor() ([]byte, []int) {
-	return file_session_session_proto_rawDescGZIP(), []int{6}
-}
-
-// Signal
+// SignalPeer
 type SignalMessage struct {
 	state     protoimpl.MessageState `protogen:"open.v1"`
 	SessionId string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
 	PeerId    string                 `protobuf:"bytes,2,opt,name=peer_id,json=peerId,proto3" json:"peer_id,omitempty"`
 	// Types that are valid to be assigned to Payload:
 	//
-	//	*SignalMessage_RemoteDescription
+	//	*SignalMessage_RemoteOffer
 	//	*SignalMessage_RemoteIceCandidate
-	//	*SignalMessage_LocalDescription
+	//	*SignalMessage_LocalAnswer
 	//	*SignalMessage_LocalIceCandidate
 	//	*SignalMessage_RenegotiationNeeded
 	Payload       isSignalMessage_Payload `protobuf_oneof:"payload"`
@@ -400,7 +266,7 @@ type SignalMessage struct {
 
 func (x *SignalMessage) Reset() {
 	*x = SignalMessage{}
-	mi := &file_session_session_proto_msgTypes[7]
+	mi := &file_session_session_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -412,7 +278,7 @@ func (x *SignalMessage) String() string {
 func (*SignalMessage) ProtoMessage() {}
 
 func (x *SignalMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_session_session_proto_msgTypes[7]
+	mi := &file_session_session_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -425,7 +291,7 @@ func (x *SignalMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SignalMessage.ProtoReflect.Descriptor instead.
 func (*SignalMessage) Descriptor() ([]byte, []int) {
-	return file_session_session_proto_rawDescGZIP(), []int{7}
+	return file_session_session_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *SignalMessage) GetSessionId() string {
@@ -449,10 +315,10 @@ func (x *SignalMessage) GetPayload() isSignalMessage_Payload {
 	return nil
 }
 
-func (x *SignalMessage) GetRemoteDescription() *RemoteDescription {
+func (x *SignalMessage) GetRemoteOffer() *RemoteOffer {
 	if x != nil {
-		if x, ok := x.Payload.(*SignalMessage_RemoteDescription); ok {
-			return x.RemoteDescription
+		if x, ok := x.Payload.(*SignalMessage_RemoteOffer); ok {
+			return x.RemoteOffer
 		}
 	}
 	return nil
@@ -467,10 +333,10 @@ func (x *SignalMessage) GetRemoteIceCandidate() *RemoteIceCandidate {
 	return nil
 }
 
-func (x *SignalMessage) GetLocalDescription() *LocalDescription {
+func (x *SignalMessage) GetLocalAnswer() *LocalAnswer {
 	if x != nil {
-		if x, ok := x.Payload.(*SignalMessage_LocalDescription); ok {
-			return x.LocalDescription
+		if x, ok := x.Payload.(*SignalMessage_LocalAnswer); ok {
+			return x.LocalAnswer
 		}
 	}
 	return nil
@@ -498,16 +364,16 @@ type isSignalMessage_Payload interface {
 	isSignalMessage_Payload()
 }
 
-type SignalMessage_RemoteDescription struct {
-	RemoteDescription *RemoteDescription `protobuf:"bytes,3,opt,name=remote_description,json=remoteDescription,proto3,oneof"`
+type SignalMessage_RemoteOffer struct {
+	RemoteOffer *RemoteOffer `protobuf:"bytes,3,opt,name=remote_offer,json=remoteOffer,proto3,oneof"`
 }
 
 type SignalMessage_RemoteIceCandidate struct {
 	RemoteIceCandidate *RemoteIceCandidate `protobuf:"bytes,4,opt,name=remote_ice_candidate,json=remoteIceCandidate,proto3,oneof"`
 }
 
-type SignalMessage_LocalDescription struct {
-	LocalDescription *LocalDescription `protobuf:"bytes,5,opt,name=local_description,json=localDescription,proto3,oneof"`
+type SignalMessage_LocalAnswer struct {
+	LocalAnswer *LocalAnswer `protobuf:"bytes,5,opt,name=local_answer,json=localAnswer,proto3,oneof"`
 }
 
 type SignalMessage_LocalIceCandidate struct {
@@ -518,38 +384,38 @@ type SignalMessage_RenegotiationNeeded struct {
 	RenegotiationNeeded *RenegotiationNeeded `protobuf:"bytes,7,opt,name=renegotiation_needed,json=renegotiationNeeded,proto3,oneof"`
 }
 
-func (*SignalMessage_RemoteDescription) isSignalMessage_Payload() {}
+func (*SignalMessage_RemoteOffer) isSignalMessage_Payload() {}
 
 func (*SignalMessage_RemoteIceCandidate) isSignalMessage_Payload() {}
 
-func (*SignalMessage_LocalDescription) isSignalMessage_Payload() {}
+func (*SignalMessage_LocalAnswer) isSignalMessage_Payload() {}
 
 func (*SignalMessage_LocalIceCandidate) isSignalMessage_Payload() {}
 
 func (*SignalMessage_RenegotiationNeeded) isSignalMessage_Payload() {}
 
-type RemoteDescription struct {
+type RemoteOffer struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Description   *SessionDescription    `protobuf:"bytes,1,opt,name=description,proto3" json:"description,omitempty"`
+	Offer         *SessionDescription    `protobuf:"bytes,1,opt,name=offer,proto3" json:"offer,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RemoteDescription) Reset() {
-	*x = RemoteDescription{}
-	mi := &file_session_session_proto_msgTypes[8]
+func (x *RemoteOffer) Reset() {
+	*x = RemoteOffer{}
+	mi := &file_session_session_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RemoteDescription) String() string {
+func (x *RemoteOffer) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RemoteDescription) ProtoMessage() {}
+func (*RemoteOffer) ProtoMessage() {}
 
-func (x *RemoteDescription) ProtoReflect() protoreflect.Message {
-	mi := &file_session_session_proto_msgTypes[8]
+func (x *RemoteOffer) ProtoReflect() protoreflect.Message {
+	mi := &file_session_session_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -560,14 +426,14 @@ func (x *RemoteDescription) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RemoteDescription.ProtoReflect.Descriptor instead.
-func (*RemoteDescription) Descriptor() ([]byte, []int) {
-	return file_session_session_proto_rawDescGZIP(), []int{8}
+// Deprecated: Use RemoteOffer.ProtoReflect.Descriptor instead.
+func (*RemoteOffer) Descriptor() ([]byte, []int) {
+	return file_session_session_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *RemoteDescription) GetDescription() *SessionDescription {
+func (x *RemoteOffer) GetOffer() *SessionDescription {
 	if x != nil {
-		return x.Description
+		return x.Offer
 	}
 	return nil
 }
@@ -581,7 +447,7 @@ type RemoteIceCandidate struct {
 
 func (x *RemoteIceCandidate) Reset() {
 	*x = RemoteIceCandidate{}
-	mi := &file_session_session_proto_msgTypes[9]
+	mi := &file_session_session_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -593,7 +459,7 @@ func (x *RemoteIceCandidate) String() string {
 func (*RemoteIceCandidate) ProtoMessage() {}
 
 func (x *RemoteIceCandidate) ProtoReflect() protoreflect.Message {
-	mi := &file_session_session_proto_msgTypes[9]
+	mi := &file_session_session_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -606,7 +472,7 @@ func (x *RemoteIceCandidate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoteIceCandidate.ProtoReflect.Descriptor instead.
 func (*RemoteIceCandidate) Descriptor() ([]byte, []int) {
-	return file_session_session_proto_rawDescGZIP(), []int{9}
+	return file_session_session_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *RemoteIceCandidate) GetCandidate() *IceCandidate {
@@ -616,28 +482,28 @@ func (x *RemoteIceCandidate) GetCandidate() *IceCandidate {
 	return nil
 }
 
-type LocalDescription struct {
+type LocalAnswer struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Description   *SessionDescription    `protobuf:"bytes,1,opt,name=description,proto3" json:"description,omitempty"`
+	Answer        *SessionDescription    `protobuf:"bytes,1,opt,name=answer,proto3" json:"answer,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *LocalDescription) Reset() {
-	*x = LocalDescription{}
-	mi := &file_session_session_proto_msgTypes[10]
+func (x *LocalAnswer) Reset() {
+	*x = LocalAnswer{}
+	mi := &file_session_session_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *LocalDescription) String() string {
+func (x *LocalAnswer) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*LocalDescription) ProtoMessage() {}
+func (*LocalAnswer) ProtoMessage() {}
 
-func (x *LocalDescription) ProtoReflect() protoreflect.Message {
-	mi := &file_session_session_proto_msgTypes[10]
+func (x *LocalAnswer) ProtoReflect() protoreflect.Message {
+	mi := &file_session_session_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -648,14 +514,14 @@ func (x *LocalDescription) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use LocalDescription.ProtoReflect.Descriptor instead.
-func (*LocalDescription) Descriptor() ([]byte, []int) {
-	return file_session_session_proto_rawDescGZIP(), []int{10}
+// Deprecated: Use LocalAnswer.ProtoReflect.Descriptor instead.
+func (*LocalAnswer) Descriptor() ([]byte, []int) {
+	return file_session_session_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *LocalDescription) GetDescription() *SessionDescription {
+func (x *LocalAnswer) GetAnswer() *SessionDescription {
 	if x != nil {
-		return x.Description
+		return x.Answer
 	}
 	return nil
 }
@@ -669,7 +535,7 @@ type LocalIceCandidate struct {
 
 func (x *LocalIceCandidate) Reset() {
 	*x = LocalIceCandidate{}
-	mi := &file_session_session_proto_msgTypes[11]
+	mi := &file_session_session_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -681,7 +547,7 @@ func (x *LocalIceCandidate) String() string {
 func (*LocalIceCandidate) ProtoMessage() {}
 
 func (x *LocalIceCandidate) ProtoReflect() protoreflect.Message {
-	mi := &file_session_session_proto_msgTypes[11]
+	mi := &file_session_session_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -694,7 +560,7 @@ func (x *LocalIceCandidate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LocalIceCandidate.ProtoReflect.Descriptor instead.
 func (*LocalIceCandidate) Descriptor() ([]byte, []int) {
-	return file_session_session_proto_rawDescGZIP(), []int{11}
+	return file_session_session_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *LocalIceCandidate) GetCandidate() *IceCandidate {
@@ -714,7 +580,7 @@ type SessionDescription struct {
 
 func (x *SessionDescription) Reset() {
 	*x = SessionDescription{}
-	mi := &file_session_session_proto_msgTypes[12]
+	mi := &file_session_session_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -726,7 +592,7 @@ func (x *SessionDescription) String() string {
 func (*SessionDescription) ProtoMessage() {}
 
 func (x *SessionDescription) ProtoReflect() protoreflect.Message {
-	mi := &file_session_session_proto_msgTypes[12]
+	mi := &file_session_session_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -739,7 +605,7 @@ func (x *SessionDescription) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SessionDescription.ProtoReflect.Descriptor instead.
 func (*SessionDescription) Descriptor() ([]byte, []int) {
-	return file_session_session_proto_rawDescGZIP(), []int{12}
+	return file_session_session_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *SessionDescription) GetType() SdpType {
@@ -768,7 +634,7 @@ type IceCandidate struct {
 
 func (x *IceCandidate) Reset() {
 	*x = IceCandidate{}
-	mi := &file_session_session_proto_msgTypes[13]
+	mi := &file_session_session_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -780,7 +646,7 @@ func (x *IceCandidate) String() string {
 func (*IceCandidate) ProtoMessage() {}
 
 func (x *IceCandidate) ProtoReflect() protoreflect.Message {
-	mi := &file_session_session_proto_msgTypes[13]
+	mi := &file_session_session_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -793,7 +659,7 @@ func (x *IceCandidate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IceCandidate.ProtoReflect.Descriptor instead.
 func (*IceCandidate) Descriptor() ([]byte, []int) {
-	return file_session_session_proto_rawDescGZIP(), []int{13}
+	return file_session_session_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *IceCandidate) GetCandidate() string {
@@ -833,7 +699,7 @@ type RenegotiationNeeded struct {
 
 func (x *RenegotiationNeeded) Reset() {
 	*x = RenegotiationNeeded{}
-	mi := &file_session_session_proto_msgTypes[14]
+	mi := &file_session_session_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -845,7 +711,7 @@ func (x *RenegotiationNeeded) String() string {
 func (*RenegotiationNeeded) ProtoMessage() {}
 
 func (x *RenegotiationNeeded) ProtoReflect() protoreflect.Message {
-	mi := &file_session_session_proto_msgTypes[14]
+	mi := &file_session_session_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -858,7 +724,7 @@ func (x *RenegotiationNeeded) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RenegotiationNeeded.ProtoReflect.Descriptor instead.
 func (*RenegotiationNeeded) Descriptor() ([]byte, []int) {
-	return file_session_session_proto_rawDescGZIP(), []int{14}
+	return file_session_session_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *RenegotiationNeeded) GetOffer() *SessionDescription {
@@ -879,7 +745,7 @@ type LeaveSessionRequest struct {
 
 func (x *LeaveSessionRequest) Reset() {
 	*x = LeaveSessionRequest{}
-	mi := &file_session_session_proto_msgTypes[15]
+	mi := &file_session_session_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -891,7 +757,7 @@ func (x *LeaveSessionRequest) String() string {
 func (*LeaveSessionRequest) ProtoMessage() {}
 
 func (x *LeaveSessionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_session_session_proto_msgTypes[15]
+	mi := &file_session_session_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -904,7 +770,7 @@ func (x *LeaveSessionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LeaveSessionRequest.ProtoReflect.Descriptor instead.
 func (*LeaveSessionRequest) Descriptor() ([]byte, []int) {
-	return file_session_session_proto_rawDescGZIP(), []int{15}
+	return file_session_session_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *LeaveSessionRequest) GetSessionId() string {
@@ -929,7 +795,7 @@ type LeaveSessionResponse struct {
 
 func (x *LeaveSessionResponse) Reset() {
 	*x = LeaveSessionResponse{}
-	mi := &file_session_session_proto_msgTypes[16]
+	mi := &file_session_session_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -941,7 +807,7 @@ func (x *LeaveSessionResponse) String() string {
 func (*LeaveSessionResponse) ProtoMessage() {}
 
 func (x *LeaveSessionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_session_session_proto_msgTypes[16]
+	mi := &file_session_session_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -954,7 +820,7 @@ func (x *LeaveSessionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LeaveSessionResponse.ProtoReflect.Descriptor instead.
 func (*LeaveSessionResponse) Descriptor() ([]byte, []int) {
-	return file_session_session_proto_rawDescGZIP(), []int{16}
+	return file_session_session_proto_rawDescGZIP(), []int{13}
 }
 
 var File_session_session_proto protoreflect.FileDescriptor
@@ -971,30 +837,23 @@ const file_session_session_proto_rawDesc = "" +
 	"\n" +
 	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x17\n" +
 	"\apeer_id\x18\x02 \x01(\tR\x06peerId\"\x15\n" +
-	"\x13JoinSessionResponse\"Q\n" +
-	"\x17OpenSignalStreamRequest\x12\x1d\n" +
-	"\n" +
-	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x17\n" +
-	"\apeer_id\x18\x02 \x01(\tR\x06peerId\"E\n" +
-	"\x11SendSignalRequest\x120\n" +
-	"\amessage\x18\x01 \x01(\v2\x16.session.SignalMessageR\amessage\"\x14\n" +
-	"\x12SendSignalResponse\"\xdb\x03\n" +
+	"\x13JoinSessionResponse\"\xba\x03\n" +
 	"\rSignalMessage\x12\x1d\n" +
 	"\n" +
 	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x17\n" +
-	"\apeer_id\x18\x02 \x01(\tR\x06peerId\x12K\n" +
-	"\x12remote_description\x18\x03 \x01(\v2\x1a.session.RemoteDescriptionH\x00R\x11remoteDescription\x12O\n" +
-	"\x14remote_ice_candidate\x18\x04 \x01(\v2\x1b.session.RemoteIceCandidateH\x00R\x12remoteIceCandidate\x12H\n" +
-	"\x11local_description\x18\x05 \x01(\v2\x19.session.LocalDescriptionH\x00R\x10localDescription\x12L\n" +
+	"\apeer_id\x18\x02 \x01(\tR\x06peerId\x129\n" +
+	"\fremote_offer\x18\x03 \x01(\v2\x14.session.RemoteOfferH\x00R\vremoteOffer\x12O\n" +
+	"\x14remote_ice_candidate\x18\x04 \x01(\v2\x1b.session.RemoteIceCandidateH\x00R\x12remoteIceCandidate\x129\n" +
+	"\flocal_answer\x18\x05 \x01(\v2\x14.session.LocalAnswerH\x00R\vlocalAnswer\x12L\n" +
 	"\x13local_ice_candidate\x18\x06 \x01(\v2\x1a.session.LocalIceCandidateH\x00R\x11localIceCandidate\x12Q\n" +
 	"\x14renegotiation_needed\x18\a \x01(\v2\x1c.session.RenegotiationNeededH\x00R\x13renegotiationNeededB\t\n" +
-	"\apayload\"R\n" +
-	"\x11RemoteDescription\x12=\n" +
-	"\vdescription\x18\x01 \x01(\v2\x1b.session.SessionDescriptionR\vdescription\"I\n" +
+	"\apayload\"@\n" +
+	"\vRemoteOffer\x121\n" +
+	"\x05offer\x18\x01 \x01(\v2\x1b.session.SessionDescriptionR\x05offer\"I\n" +
 	"\x12RemoteIceCandidate\x123\n" +
-	"\tcandidate\x18\x01 \x01(\v2\x15.session.IceCandidateR\tcandidate\"Q\n" +
-	"\x10LocalDescription\x12=\n" +
-	"\vdescription\x18\x01 \x01(\v2\x1b.session.SessionDescriptionR\vdescription\"H\n" +
+	"\tcandidate\x18\x01 \x01(\v2\x15.session.IceCandidateR\tcandidate\"B\n" +
+	"\vLocalAnswer\x123\n" +
+	"\x06answer\x18\x01 \x01(\v2\x1b.session.SessionDescriptionR\x06answer\"H\n" +
 	"\x11LocalIceCandidate\x123\n" +
 	"\tcandidate\x18\x01 \x01(\v2\x15.session.IceCandidateR\tcandidate\"L\n" +
 	"\x12SessionDescription\x12$\n" +
@@ -1015,13 +874,12 @@ const file_session_session_proto_rawDesc = "" +
 	"\aSdpType\x12\x18\n" +
 	"\x14SDP_TYPE_UNSPECIFIED\x10\x00\x12\x12\n" +
 	"\x0eSDP_TYPE_OFFER\x10\x01\x12\x13\n" +
-	"\x0fSDP_TYPE_ANSWER\x10\x022\x87\x03\n" +
+	"\x0fSDP_TYPE_ANSWER\x10\x022\xb2\x02\n" +
 	"\aSession\x12N\n" +
 	"\rCreateSession\x12\x1d.session.CreateSessionRequest\x1a\x1e.session.CreateSessionResponse\x12H\n" +
-	"\vJoinSession\x12\x1b.session.JoinSessionRequest\x1a\x1c.session.JoinSessionResponse\x12N\n" +
-	"\x10OpenSignalStream\x12 .session.OpenSignalStreamRequest\x1a\x16.session.SignalMessage0\x01\x12E\n" +
+	"\vJoinSession\x12\x1b.session.JoinSessionRequest\x1a\x1c.session.JoinSessionResponse\x12@\n" +
 	"\n" +
-	"SendSignal\x12\x1a.session.SendSignalRequest\x1a\x1b.session.SendSignalResponse\x12K\n" +
+	"SignalPeer\x12\x16.session.SignalMessage\x1a\x16.session.SignalMessage(\x010\x01\x12K\n" +
 	"\fLeaveSession\x12\x1c.session.LeaveSessionRequest\x1a\x1d.session.LeaveSessionResponseB\x16Z\x14session.v1;sessionv1b\x06proto3"
 
 var (
@@ -1037,55 +895,49 @@ func file_session_session_proto_rawDescGZIP() []byte {
 }
 
 var file_session_session_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_session_session_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_session_session_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_session_session_proto_goTypes = []any{
-	(SdpType)(0),                    // 0: session.SdpType
-	(*CreateSessionRequest)(nil),    // 1: session.CreateSessionRequest
-	(*CreateSessionResponse)(nil),   // 2: session.CreateSessionResponse
-	(*JoinSessionRequest)(nil),      // 3: session.JoinSessionRequest
-	(*JoinSessionResponse)(nil),     // 4: session.JoinSessionResponse
-	(*OpenSignalStreamRequest)(nil), // 5: session.OpenSignalStreamRequest
-	(*SendSignalRequest)(nil),       // 6: session.SendSignalRequest
-	(*SendSignalResponse)(nil),      // 7: session.SendSignalResponse
-	(*SignalMessage)(nil),           // 8: session.SignalMessage
-	(*RemoteDescription)(nil),       // 9: session.RemoteDescription
-	(*RemoteIceCandidate)(nil),      // 10: session.RemoteIceCandidate
-	(*LocalDescription)(nil),        // 11: session.LocalDescription
-	(*LocalIceCandidate)(nil),       // 12: session.LocalIceCandidate
-	(*SessionDescription)(nil),      // 13: session.SessionDescription
-	(*IceCandidate)(nil),            // 14: session.IceCandidate
-	(*RenegotiationNeeded)(nil),     // 15: session.RenegotiationNeeded
-	(*LeaveSessionRequest)(nil),     // 16: session.LeaveSessionRequest
-	(*LeaveSessionResponse)(nil),    // 17: session.LeaveSessionResponse
+	(SdpType)(0),                  // 0: session.SdpType
+	(*CreateSessionRequest)(nil),  // 1: session.CreateSessionRequest
+	(*CreateSessionResponse)(nil), // 2: session.CreateSessionResponse
+	(*JoinSessionRequest)(nil),    // 3: session.JoinSessionRequest
+	(*JoinSessionResponse)(nil),   // 4: session.JoinSessionResponse
+	(*SignalMessage)(nil),         // 5: session.SignalMessage
+	(*RemoteOffer)(nil),           // 6: session.RemoteOffer
+	(*RemoteIceCandidate)(nil),    // 7: session.RemoteIceCandidate
+	(*LocalAnswer)(nil),           // 8: session.LocalAnswer
+	(*LocalIceCandidate)(nil),     // 9: session.LocalIceCandidate
+	(*SessionDescription)(nil),    // 10: session.SessionDescription
+	(*IceCandidate)(nil),          // 11: session.IceCandidate
+	(*RenegotiationNeeded)(nil),   // 12: session.RenegotiationNeeded
+	(*LeaveSessionRequest)(nil),   // 13: session.LeaveSessionRequest
+	(*LeaveSessionResponse)(nil),  // 14: session.LeaveSessionResponse
 }
 var file_session_session_proto_depIdxs = []int32{
-	8,  // 0: session.SendSignalRequest.message:type_name -> session.SignalMessage
-	9,  // 1: session.SignalMessage.remote_description:type_name -> session.RemoteDescription
-	10, // 2: session.SignalMessage.remote_ice_candidate:type_name -> session.RemoteIceCandidate
-	11, // 3: session.SignalMessage.local_description:type_name -> session.LocalDescription
-	12, // 4: session.SignalMessage.local_ice_candidate:type_name -> session.LocalIceCandidate
-	15, // 5: session.SignalMessage.renegotiation_needed:type_name -> session.RenegotiationNeeded
-	13, // 6: session.RemoteDescription.description:type_name -> session.SessionDescription
-	14, // 7: session.RemoteIceCandidate.candidate:type_name -> session.IceCandidate
-	13, // 8: session.LocalDescription.description:type_name -> session.SessionDescription
-	14, // 9: session.LocalIceCandidate.candidate:type_name -> session.IceCandidate
-	0,  // 10: session.SessionDescription.type:type_name -> session.SdpType
-	13, // 11: session.RenegotiationNeeded.offer:type_name -> session.SessionDescription
-	1,  // 12: session.Session.CreateSession:input_type -> session.CreateSessionRequest
-	3,  // 13: session.Session.JoinSession:input_type -> session.JoinSessionRequest
-	5,  // 14: session.Session.OpenSignalStream:input_type -> session.OpenSignalStreamRequest
-	6,  // 15: session.Session.SendSignal:input_type -> session.SendSignalRequest
-	16, // 16: session.Session.LeaveSession:input_type -> session.LeaveSessionRequest
-	2,  // 17: session.Session.CreateSession:output_type -> session.CreateSessionResponse
-	4,  // 18: session.Session.JoinSession:output_type -> session.JoinSessionResponse
-	8,  // 19: session.Session.OpenSignalStream:output_type -> session.SignalMessage
-	7,  // 20: session.Session.SendSignal:output_type -> session.SendSignalResponse
-	17, // 21: session.Session.LeaveSession:output_type -> session.LeaveSessionResponse
-	17, // [17:22] is the sub-list for method output_type
-	12, // [12:17] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	6,  // 0: session.SignalMessage.remote_offer:type_name -> session.RemoteOffer
+	7,  // 1: session.SignalMessage.remote_ice_candidate:type_name -> session.RemoteIceCandidate
+	8,  // 2: session.SignalMessage.local_answer:type_name -> session.LocalAnswer
+	9,  // 3: session.SignalMessage.local_ice_candidate:type_name -> session.LocalIceCandidate
+	12, // 4: session.SignalMessage.renegotiation_needed:type_name -> session.RenegotiationNeeded
+	10, // 5: session.RemoteOffer.offer:type_name -> session.SessionDescription
+	11, // 6: session.RemoteIceCandidate.candidate:type_name -> session.IceCandidate
+	10, // 7: session.LocalAnswer.answer:type_name -> session.SessionDescription
+	11, // 8: session.LocalIceCandidate.candidate:type_name -> session.IceCandidate
+	0,  // 9: session.SessionDescription.type:type_name -> session.SdpType
+	10, // 10: session.RenegotiationNeeded.offer:type_name -> session.SessionDescription
+	1,  // 11: session.Session.CreateSession:input_type -> session.CreateSessionRequest
+	3,  // 12: session.Session.JoinSession:input_type -> session.JoinSessionRequest
+	5,  // 13: session.Session.SignalPeer:input_type -> session.SignalMessage
+	13, // 14: session.Session.LeaveSession:input_type -> session.LeaveSessionRequest
+	2,  // 15: session.Session.CreateSession:output_type -> session.CreateSessionResponse
+	4,  // 16: session.Session.JoinSession:output_type -> session.JoinSessionResponse
+	5,  // 17: session.Session.SignalPeer:output_type -> session.SignalMessage
+	14, // 18: session.Session.LeaveSession:output_type -> session.LeaveSessionResponse
+	15, // [15:19] is the sub-list for method output_type
+	11, // [11:15] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_session_session_proto_init() }
@@ -1093,10 +945,10 @@ func file_session_session_proto_init() {
 	if File_session_session_proto != nil {
 		return
 	}
-	file_session_session_proto_msgTypes[7].OneofWrappers = []any{
-		(*SignalMessage_RemoteDescription)(nil),
+	file_session_session_proto_msgTypes[4].OneofWrappers = []any{
+		(*SignalMessage_RemoteOffer)(nil),
 		(*SignalMessage_RemoteIceCandidate)(nil),
-		(*SignalMessage_LocalDescription)(nil),
+		(*SignalMessage_LocalAnswer)(nil),
 		(*SignalMessage_LocalIceCandidate)(nil),
 		(*SignalMessage_RenegotiationNeeded)(nil),
 	}
@@ -1106,7 +958,7 @@ func file_session_session_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_session_session_proto_rawDesc), len(file_session_session_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   17,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
