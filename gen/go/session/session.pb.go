@@ -254,9 +254,9 @@ type SignalMessage struct {
 	PeerId    string                 `protobuf:"bytes,2,opt,name=peer_id,json=peerId,proto3" json:"peer_id,omitempty"`
 	// Types that are valid to be assigned to Payload:
 	//
-	//	*SignalMessage_RemoteOffer
+	//	*SignalMessage_RemoteDescription
 	//	*SignalMessage_RemoteIceCandidate
-	//	*SignalMessage_LocalAnswer
+	//	*SignalMessage_LocalDescription
 	//	*SignalMessage_LocalIceCandidate
 	//	*SignalMessage_RenegotiationNeeded
 	Payload       isSignalMessage_Payload `protobuf_oneof:"payload"`
@@ -315,10 +315,10 @@ func (x *SignalMessage) GetPayload() isSignalMessage_Payload {
 	return nil
 }
 
-func (x *SignalMessage) GetRemoteOffer() *RemoteOffer {
+func (x *SignalMessage) GetRemoteDescription() *RemoteDescription {
 	if x != nil {
-		if x, ok := x.Payload.(*SignalMessage_RemoteOffer); ok {
-			return x.RemoteOffer
+		if x, ok := x.Payload.(*SignalMessage_RemoteDescription); ok {
+			return x.RemoteDescription
 		}
 	}
 	return nil
@@ -333,10 +333,10 @@ func (x *SignalMessage) GetRemoteIceCandidate() *RemoteIceCandidate {
 	return nil
 }
 
-func (x *SignalMessage) GetLocalAnswer() *LocalAnswer {
+func (x *SignalMessage) GetLocalDescription() *LocalDescription {
 	if x != nil {
-		if x, ok := x.Payload.(*SignalMessage_LocalAnswer); ok {
-			return x.LocalAnswer
+		if x, ok := x.Payload.(*SignalMessage_LocalDescription); ok {
+			return x.LocalDescription
 		}
 	}
 	return nil
@@ -364,16 +364,16 @@ type isSignalMessage_Payload interface {
 	isSignalMessage_Payload()
 }
 
-type SignalMessage_RemoteOffer struct {
-	RemoteOffer *RemoteOffer `protobuf:"bytes,3,opt,name=remote_offer,json=remoteOffer,proto3,oneof"`
+type SignalMessage_RemoteDescription struct {
+	RemoteDescription *RemoteDescription `protobuf:"bytes,3,opt,name=remote_description,json=remoteDescription,proto3,oneof"`
 }
 
 type SignalMessage_RemoteIceCandidate struct {
 	RemoteIceCandidate *RemoteIceCandidate `protobuf:"bytes,4,opt,name=remote_ice_candidate,json=remoteIceCandidate,proto3,oneof"`
 }
 
-type SignalMessage_LocalAnswer struct {
-	LocalAnswer *LocalAnswer `protobuf:"bytes,5,opt,name=local_answer,json=localAnswer,proto3,oneof"`
+type SignalMessage_LocalDescription struct {
+	LocalDescription *LocalDescription `protobuf:"bytes,5,opt,name=local_description,json=localDescription,proto3,oneof"`
 }
 
 type SignalMessage_LocalIceCandidate struct {
@@ -384,37 +384,37 @@ type SignalMessage_RenegotiationNeeded struct {
 	RenegotiationNeeded *RenegotiationNeeded `protobuf:"bytes,7,opt,name=renegotiation_needed,json=renegotiationNeeded,proto3,oneof"`
 }
 
-func (*SignalMessage_RemoteOffer) isSignalMessage_Payload() {}
+func (*SignalMessage_RemoteDescription) isSignalMessage_Payload() {}
 
 func (*SignalMessage_RemoteIceCandidate) isSignalMessage_Payload() {}
 
-func (*SignalMessage_LocalAnswer) isSignalMessage_Payload() {}
+func (*SignalMessage_LocalDescription) isSignalMessage_Payload() {}
 
 func (*SignalMessage_LocalIceCandidate) isSignalMessage_Payload() {}
 
 func (*SignalMessage_RenegotiationNeeded) isSignalMessage_Payload() {}
 
-type RemoteOffer struct {
+type RemoteDescription struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Offer         *SessionDescription    `protobuf:"bytes,1,opt,name=offer,proto3" json:"offer,omitempty"`
+	Description   *SessionDescription    `protobuf:"bytes,1,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RemoteOffer) Reset() {
-	*x = RemoteOffer{}
+func (x *RemoteDescription) Reset() {
+	*x = RemoteDescription{}
 	mi := &file_session_session_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RemoteOffer) String() string {
+func (x *RemoteDescription) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RemoteOffer) ProtoMessage() {}
+func (*RemoteDescription) ProtoMessage() {}
 
-func (x *RemoteOffer) ProtoReflect() protoreflect.Message {
+func (x *RemoteDescription) ProtoReflect() protoreflect.Message {
 	mi := &file_session_session_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -426,14 +426,14 @@ func (x *RemoteOffer) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RemoteOffer.ProtoReflect.Descriptor instead.
-func (*RemoteOffer) Descriptor() ([]byte, []int) {
+// Deprecated: Use RemoteDescription.ProtoReflect.Descriptor instead.
+func (*RemoteDescription) Descriptor() ([]byte, []int) {
 	return file_session_session_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *RemoteOffer) GetOffer() *SessionDescription {
+func (x *RemoteDescription) GetDescription() *SessionDescription {
 	if x != nil {
-		return x.Offer
+		return x.Description
 	}
 	return nil
 }
@@ -482,27 +482,27 @@ func (x *RemoteIceCandidate) GetCandidate() *IceCandidate {
 	return nil
 }
 
-type LocalAnswer struct {
+type LocalDescription struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Answer        *SessionDescription    `protobuf:"bytes,1,opt,name=answer,proto3" json:"answer,omitempty"`
+	Description   *SessionDescription    `protobuf:"bytes,1,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *LocalAnswer) Reset() {
-	*x = LocalAnswer{}
+func (x *LocalDescription) Reset() {
+	*x = LocalDescription{}
 	mi := &file_session_session_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *LocalAnswer) String() string {
+func (x *LocalDescription) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*LocalAnswer) ProtoMessage() {}
+func (*LocalDescription) ProtoMessage() {}
 
-func (x *LocalAnswer) ProtoReflect() protoreflect.Message {
+func (x *LocalDescription) ProtoReflect() protoreflect.Message {
 	mi := &file_session_session_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -514,14 +514,14 @@ func (x *LocalAnswer) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use LocalAnswer.ProtoReflect.Descriptor instead.
-func (*LocalAnswer) Descriptor() ([]byte, []int) {
+// Deprecated: Use LocalDescription.ProtoReflect.Descriptor instead.
+func (*LocalDescription) Descriptor() ([]byte, []int) {
 	return file_session_session_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *LocalAnswer) GetAnswer() *SessionDescription {
+func (x *LocalDescription) GetDescription() *SessionDescription {
 	if x != nil {
-		return x.Answer
+		return x.Description
 	}
 	return nil
 }
@@ -837,23 +837,23 @@ const file_session_session_proto_rawDesc = "" +
 	"\n" +
 	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x17\n" +
 	"\apeer_id\x18\x02 \x01(\tR\x06peerId\"\x15\n" +
-	"\x13JoinSessionResponse\"\xba\x03\n" +
+	"\x13JoinSessionResponse\"\xdb\x03\n" +
 	"\rSignalMessage\x12\x1d\n" +
 	"\n" +
 	"session_id\x18\x01 \x01(\tR\tsessionId\x12\x17\n" +
-	"\apeer_id\x18\x02 \x01(\tR\x06peerId\x129\n" +
-	"\fremote_offer\x18\x03 \x01(\v2\x14.session.RemoteOfferH\x00R\vremoteOffer\x12O\n" +
-	"\x14remote_ice_candidate\x18\x04 \x01(\v2\x1b.session.RemoteIceCandidateH\x00R\x12remoteIceCandidate\x129\n" +
-	"\flocal_answer\x18\x05 \x01(\v2\x14.session.LocalAnswerH\x00R\vlocalAnswer\x12L\n" +
+	"\apeer_id\x18\x02 \x01(\tR\x06peerId\x12K\n" +
+	"\x12remote_description\x18\x03 \x01(\v2\x1a.session.RemoteDescriptionH\x00R\x11remoteDescription\x12O\n" +
+	"\x14remote_ice_candidate\x18\x04 \x01(\v2\x1b.session.RemoteIceCandidateH\x00R\x12remoteIceCandidate\x12H\n" +
+	"\x11local_description\x18\x05 \x01(\v2\x19.session.LocalDescriptionH\x00R\x10localDescription\x12L\n" +
 	"\x13local_ice_candidate\x18\x06 \x01(\v2\x1a.session.LocalIceCandidateH\x00R\x11localIceCandidate\x12Q\n" +
 	"\x14renegotiation_needed\x18\a \x01(\v2\x1c.session.RenegotiationNeededH\x00R\x13renegotiationNeededB\t\n" +
-	"\apayload\"@\n" +
-	"\vRemoteOffer\x121\n" +
-	"\x05offer\x18\x01 \x01(\v2\x1b.session.SessionDescriptionR\x05offer\"I\n" +
+	"\apayload\"R\n" +
+	"\x11RemoteDescription\x12=\n" +
+	"\vdescription\x18\x01 \x01(\v2\x1b.session.SessionDescriptionR\vdescription\"I\n" +
 	"\x12RemoteIceCandidate\x123\n" +
-	"\tcandidate\x18\x01 \x01(\v2\x15.session.IceCandidateR\tcandidate\"B\n" +
-	"\vLocalAnswer\x123\n" +
-	"\x06answer\x18\x01 \x01(\v2\x1b.session.SessionDescriptionR\x06answer\"H\n" +
+	"\tcandidate\x18\x01 \x01(\v2\x15.session.IceCandidateR\tcandidate\"Q\n" +
+	"\x10LocalDescription\x12=\n" +
+	"\vdescription\x18\x01 \x01(\v2\x1b.session.SessionDescriptionR\vdescription\"H\n" +
 	"\x11LocalIceCandidate\x123\n" +
 	"\tcandidate\x18\x01 \x01(\v2\x15.session.IceCandidateR\tcandidate\"L\n" +
 	"\x12SessionDescription\x12$\n" +
@@ -903,9 +903,9 @@ var file_session_session_proto_goTypes = []any{
 	(*JoinSessionRequest)(nil),    // 3: session.JoinSessionRequest
 	(*JoinSessionResponse)(nil),   // 4: session.JoinSessionResponse
 	(*SignalMessage)(nil),         // 5: session.SignalMessage
-	(*RemoteOffer)(nil),           // 6: session.RemoteOffer
+	(*RemoteDescription)(nil),     // 6: session.RemoteDescription
 	(*RemoteIceCandidate)(nil),    // 7: session.RemoteIceCandidate
-	(*LocalAnswer)(nil),           // 8: session.LocalAnswer
+	(*LocalDescription)(nil),      // 8: session.LocalDescription
 	(*LocalIceCandidate)(nil),     // 9: session.LocalIceCandidate
 	(*SessionDescription)(nil),    // 10: session.SessionDescription
 	(*IceCandidate)(nil),          // 11: session.IceCandidate
@@ -914,14 +914,14 @@ var file_session_session_proto_goTypes = []any{
 	(*LeaveSessionResponse)(nil),  // 14: session.LeaveSessionResponse
 }
 var file_session_session_proto_depIdxs = []int32{
-	6,  // 0: session.SignalMessage.remote_offer:type_name -> session.RemoteOffer
+	6,  // 0: session.SignalMessage.remote_description:type_name -> session.RemoteDescription
 	7,  // 1: session.SignalMessage.remote_ice_candidate:type_name -> session.RemoteIceCandidate
-	8,  // 2: session.SignalMessage.local_answer:type_name -> session.LocalAnswer
+	8,  // 2: session.SignalMessage.local_description:type_name -> session.LocalDescription
 	9,  // 3: session.SignalMessage.local_ice_candidate:type_name -> session.LocalIceCandidate
 	12, // 4: session.SignalMessage.renegotiation_needed:type_name -> session.RenegotiationNeeded
-	10, // 5: session.RemoteOffer.offer:type_name -> session.SessionDescription
+	10, // 5: session.RemoteDescription.description:type_name -> session.SessionDescription
 	11, // 6: session.RemoteIceCandidate.candidate:type_name -> session.IceCandidate
-	10, // 7: session.LocalAnswer.answer:type_name -> session.SessionDescription
+	10, // 7: session.LocalDescription.description:type_name -> session.SessionDescription
 	11, // 8: session.LocalIceCandidate.candidate:type_name -> session.IceCandidate
 	0,  // 9: session.SessionDescription.type:type_name -> session.SdpType
 	10, // 10: session.RenegotiationNeeded.offer:type_name -> session.SessionDescription
@@ -946,9 +946,9 @@ func file_session_session_proto_init() {
 		return
 	}
 	file_session_session_proto_msgTypes[4].OneofWrappers = []any{
-		(*SignalMessage_RemoteOffer)(nil),
+		(*SignalMessage_RemoteDescription)(nil),
 		(*SignalMessage_RemoteIceCandidate)(nil),
-		(*SignalMessage_LocalAnswer)(nil),
+		(*SignalMessage_LocalDescription)(nil),
 		(*SignalMessage_LocalIceCandidate)(nil),
 		(*SignalMessage_RenegotiationNeeded)(nil),
 	}

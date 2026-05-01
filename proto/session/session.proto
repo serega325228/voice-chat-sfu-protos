@@ -32,25 +32,25 @@ message SignalMessage {
   string peer_id = 2;
 
   oneof payload {
-    RemoteOffer remote_offer = 3;
+    RemoteDescription remote_description = 3;
     RemoteIceCandidate remote_ice_candidate = 4;
 
-    LocalAnswer local_answer = 5;
+    LocalDescription local_description = 5;
     LocalIceCandidate local_ice_candidate = 6;
 
     RenegotiationNeeded renegotiation_needed = 7;
   }
 }
-message RemoteOffer {
-  SessionDescription offer = 1;
+message RemoteDescription {
+  SessionDescription description = 1;
 }
 
 message RemoteIceCandidate {
   IceCandidate candidate = 1;
 }
 
-message LocalAnswer {
-  SessionDescription answer = 1;
+message LocalDescription {
+  SessionDescription description = 1;
 }
 
 message LocalIceCandidate {
